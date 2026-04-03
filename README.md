@@ -80,9 +80,3 @@ GET https://api.qrserver.com/v1/create-qr-code/?data={URL}&size=600x600&format=p
 - QR Code padrão exibido antes da geração
 - Feedback visual de carregamento e erro
 - Layout totalmente responsivo
-
----
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT.
