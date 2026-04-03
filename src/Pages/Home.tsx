@@ -128,7 +128,7 @@ export const Home = () => {
                 </div>
             </main>
 
-            <footer className="flex flex-col items-center justify-center mt-6 sm:mt-10 lg:mt-20 mb-4 font-medium px-4 sm:px-8 text-center">
+            <footer className="flex flex-col items-center justify-center mt-3 sm:mt-10 lg:mt-20 mb-4 font-medium px-4 sm:px-8 text-center">
                 <h3 className="text-xs sm:text-sm md:text-base">
                     Sistema de geração de QR Code feito para praticar o consumo de API com AXIOS.
                 </h3>
