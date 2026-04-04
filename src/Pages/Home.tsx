@@ -2,12 +2,15 @@ import { useState } from "react"
 import { FaGithub, FaLinkedin } from "react-icons/fa"
 import { MdEmail, MdQrCode2, MdSaveAlt } from "react-icons/md"
 import { generateQRCode } from "../Services/api"
+import { ContactModal } from "../components/ContactModal"
 
 export const Home = () => {
     const [url, setUrl] = useState("")
     const [qrSrc, setQrSrc] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
+
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -45,9 +48,14 @@ export const Home = () => {
                     </a>
                 </nav>
 
-                <button className="text-white bg-azul-escuro py-1.5 px-3 sm:py-2 sm:px-4 md:py-2.5 md:px-5 rounded-2xl font-primary tracking-widest font-medium cursor-pointer hover:scale-102 text-xs sm:text-sm md:text-base">
+                <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="text-white bg-azul-escuro py-1.5 px-3 sm:py-2 sm:px-4 md:py-2.5 md:px-5 rounded-2xl font-primary tracking-widest font-medium cursor-pointer hover:scale-102 text-xs sm:text-sm md:text-base"
+                >
                     Contato
                 </button>
+
+                {isModalOpen && <ContactModal onClose={() => setIsModalOpen(false)} />}
             </header>
 
             <main className="flex flex-col lg:flex-row mt-8 sm:mt-10 lg:mt-15 gap-8 sm:gap-10 lg:gap-20 xl:gap-50 px-4 sm:px-8 md:px-12 lg:px-15 pb-10">
@@ -128,7 +136,7 @@ export const Home = () => {
                 </div>
             </main>
 
-            <footer className="flex flex-col items-center justify-center mt-3 sm:mt-10 lg:mt-20 mb-4 font-medium px-4 sm:px-8 text-center">
+            <footer className="flex flex-col items-center justify-center mt-3 sm:mt-2 lg:mt-8 mb-4 font-medium px-4 sm:px-8 text-center">
                 <h3 className="text-xs sm:text-sm md:text-base">
                     Sistema de geração de QR Code feito para praticar o consumo de API com AXIOS.
                 </h3>

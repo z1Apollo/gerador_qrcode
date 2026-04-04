@@ -1,82 +1,73 @@
-# &lt;Apollo/&gt; — Gerador de QR Code
+# React + TypeScript + Vite
 
-Aplicação web para geração de QR Codes a partir de qualquer URL. Desenvolvida para praticar o consumo de APIs externas com Axios em um ambiente React + TypeScript.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
----
+Currently, two official plugins are available:
 
-## 🔗 Demo
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-> Insira a URL, clique em **Gerar QR Code** e faça o download da imagem em PNG.
+## React Compiler
 
----
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## 🚀 Tecnologias
+## Expanding the ESLint configuration
 
-- [React](https://react.dev/) — biblioteca para construção de interfaces
-- [TypeScript](https://www.typescriptlang.org/) — tipagem estática
-- [Vite](https://vitejs.dev/) — bundler e servidor de desenvolvimento
-- [Axios](https://axios-http.com/) — cliente HTTP para consumo da API
-- [Tailwind CSS](https://tailwindcss.com/) — estilização utilitária
-- [React Icons](https://react-icons.github.io/react-icons/) — ícones
-- [QR Server API](https://goqr.me/api/) — geração dos QR Codes (gratuita, sem autenticação)
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
----
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-## 📁 Estrutura do projeto
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-```
-src/
-├── Pages/
-│   └── Home.tsx          # Página principal com o formulário e exibição do QR Code
-├── Services/
-│   └── api.ts            # Configuração do Axios e chamada à API
-├── Types/
-│   └── qr.ts             # Interfaces TypeScript
-├── App.tsx
-└── main.tsx
-```
-
----
-
-## ⚙️ Como rodar localmente
-
-**Pré-requisitos:** Node.js instalado.
-
-```bash
-# Clone o repositório
-git clone https://github.com/z1Apollo/qr-generator.git
-
-# Acesse a pasta
-cd qr-generator
-
-# Instale as dependências
-npm install
-
-# Rode o servidor de desenvolvimento
-npm run dev
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
 
-Acesse `http://localhost:5173` no navegador.
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
----
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-## 🌐 API utilizada
-
-[api.qrserver.com](https://goqr.me/api/) — gratuita, sem necessidade de cadastro ou chave de API.
-
-Formato da requisição:
-
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-GET https://api.qrserver.com/v1/create-qr-code/?data={URL}&size=600x600&format=png
-```
-
----
-
-## 📌 Funcionalidades
-
-- Geração de QR Code a partir de qualquer URL
-- Tamanho fixo de 600×600px para alta qualidade
-- Download da imagem em PNG
-- QR Code padrão exibido antes da geração
-- Feedback visual de carregamento e erro
-- Layout totalmente responsivo
